@@ -24,7 +24,7 @@ app.use(bodyParser());
 slackEvents.on('message', (event) => {
     if(event.text == "w!help" || event.text == "w! help") {
       console.log(`${event.user} wants help.`);
-      const res = await web.chat.postMessage({ channel: event.channel, text: 'Hello there' });
+      const res = web.chat.postMessage({ channel: event.channel, text: 'Hello there' });
     }
     console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
   });
