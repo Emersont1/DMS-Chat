@@ -1,57 +1,56 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
-var token = require('./config.json');
+const { createServer } = require('http');
+const express = require('express');
+const bodyParser = require('body-parser');
+const { createEventAdapter } = require('@slack/events-api');
+const { WebClient } = require('@slack/web-api');
+const slackSigningSecret = process.env.SLACK_SIGNING_SECRET;
+const token = process.env.SLACK_TOKEN;
+const port = process.env.PORT || 3000;
+const slackEvents = createEventAdapter(slackSigningSecret);
 
-client.on('ready', () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+
+// JSON inclutions
+const initial_message = require("./message.json");
+
+
+const web = new WebClient(token);
+
+// Create an express application
+const app = express();
+
+// Plug the adapter in as a middleware
+app.use('/event', slackEvents.requestListener());
+app.use('/form', slackInteractions.expressMiddleware());
+
+// Example: If you're using a body parser, always put it after the event adapter in the middleware stack
+app.use(bodyParser());
+
+// Map of events and debugging steps left
+var map = {};
+
+slackInteractions.action({ type:"test_button" }, (payload, respond) => {
+  console.log("Payload: ", payload);
+  respond({ text: 'Thanks for pushing a button.' });
+
+  // Update original message to remove buttons.
+  //chat.update()
 });
 
-client.on('message', msg => {
-  if(msg.author.bot){ // Ignore messages from other bots
-      return;
+slackEvents.on('app_mention', (event) => {
+  if(!('thread_ts' in event)) {
+    const res = web.chat.postMessage({ channel: event.channel, text: '**Door Creaks Open**, You summoned me?' , thread_ts: event.ts});
+    // decipher machine id and poulate object
   }
+})
 
-  if(msg.mentions.users.array().includes(client.user)){
-      msg.channel.send("Thanks for the ping!");
-      var a = require ("./ace.js");
-      a.f(msg.channel);
-      return;
-  }
-  if(msg.content.startsWith("!")){
-      if(msg.content.startsWith("!date")){
-        var d = new Date();
-        msg.channel.send(d.getDate());
-        return;
-      }
+slackEvents.on('message', (event) => {
 
-      if(msg.content.startsWith("!help")){
-        msg.author.send("help is coming");
-        return;
-      }
-
-      if(msg.content.startsWith("!logo"))
-      {
-          // send a discord logo
-          msg.channel.send("Here ya go", 
-          {
-              files:["https://hacksocnotts.co.uk/static/media/logo.a84dfc55.png"]
-          });
-          return;
-      }
-
-      if(msg.content.startsWith("!localfile"))
-      {
-          // send a discord logo
-          msg.channel.send("One Local file, coming up", 
-          {
-              files:[{attachment: "cheese.txt", name:"test.js"}]
-          });
-          return;
-      }
-
-      msg.channel.send("Unknown Command, send `!help` for documentation");
-  }
-  
 });
 
-client.login(token["token"]);
+// Initialize a server for the express app - you can skip this and the rest if you prefer to use app.listen()
+const server = createServer(app);
+server.listen(port, () => {
+  // Log a message when the server is ready
+  console.log(`Listening for events on ${server.address().port}`);
+});
+
