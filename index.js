@@ -9,10 +9,6 @@ const port = process.env.PORT || 3000;
 const slackEvents = createEventAdapter(slackSigningSecret);
 
 
-// JSON inclutions
-const initial_message = require("./message.json");
-
-
 const web = new WebClient(token);
 
 // Create an express application
