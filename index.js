@@ -38,15 +38,19 @@ slackEvents.on('app_mention', (event) => {
     var b = event.text.replace(/<@[A-Z0-9]+>/, "").trim();
     console.log(b);
     if (b == "") {
-
+      var str = "List of availible machines:";
+      //fs.readdirSync("routines");
+      for(const val of fs.readdirSync("routines")){
+        str += `\n+ ${val}  `;
+      }
       const res = web.chat.postMessage({
         channel: event.channel,
-        text: 'List of availible machines:\ntoaster\n3d-printer',
+        text: str,
         thread_ts: event.ts
       });
     } else {
 
-      if (!fs.existsSync(`scripts${b}/.js`)) {
+      if (!fs.existsSync(`routines/${b}.js`)) {
         const res = web.chat.postMessage({
           channel: event.channel,
           text: "I'm sorry Dave, I'm afraid I can't let you do that",
