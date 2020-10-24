@@ -20,8 +20,7 @@ export function func0 () {  //Starting question
 			}
 		]
 	}
-	var answer = [	{"emoji":"thumbsup", "function": func2()},
-					{"emoji":"thumbsdown", "function": func1()}]
+	var answer = {"thumbsup": func2, "thumbsdown": func1}
 	return { "q":question, "a":answer }
 }
 
@@ -44,8 +43,7 @@ export function func1 () {
 			}
 		]
 	}
-	var answer = [	{"emoji":"thumbsup", "function": fixed()},
-					{"emoji":"thumbsdown", "function": func2()}]
+	var answer = {"thumbsup": fixed, "thumbsdown": func2}
 	return { "q":question, "a":answer }
 }
 
@@ -61,8 +59,7 @@ export function func2 () {
 			}
 		]
 	}
-	var answer = [	{"emoji":"thumbsup", "function": func4()},
-					{"emoji":"thumbsdown", "function": func3()}]
+	var answer = {"thumbsup": func4, "thumbsdown": func3}
 	return { "q":question, "a":answer }
 }
 
@@ -85,8 +82,7 @@ export function func3 () {
 			}
 		]
 	}
-	var answer = [	{"emoji":"thumbsup", "function": fixed()},
-					{"emoji":"thumbsdown", "function": func4()}]
+	var answer = {"thumbsup": fixed, "thumbsdown": func4}
 	return { "q":question, "a":answer }
 }
 
@@ -102,8 +98,7 @@ export function func4 () {
 			}
 		]
 	}
-	var answer = [	{"emoji":"thumbsup", "function": func6()},
-					{"emoji":"thumbsdown", "function": func5()}]
+	var answer = {"thumbsup": func6, "thumbsdown": func5}
 	return { "q":question, "a":answer }
 }
 
@@ -126,8 +121,7 @@ export function func5 () {
 			}
 		]
 	}
-	var answer = [	{"emoji":"thumbsup", "function": fixed()},
-					{"emoji":"thumbsdown", "function": func6()}]
+	var answer = {"thumbsup": fixed, "thumbsdown": func6}
 	return { "q":question, "a":answer }
 }
 
@@ -143,8 +137,7 @@ export function func6 () {
 			}
 		]
 	}
-	var answer = [	{"emoji":"thumbsup", "function": not_fixed()},
-					{"emoji":"thumbsdown", "function": func7()}]
+	var answer = {"thumbsup": not_fixed, "thumbsdown": func7}
 	return { "q":question, "a":answer }
 }
 
@@ -167,8 +160,7 @@ export function func7 () {
 			}
 		]
 	}
-	var answer = [	{"emoji":"thumbsup", "function": fixed()},
-					{"emoji":"thumbsdown", "function": not_fixed()}]
+	var answer = {"thumbsup": fixed, "thumbsdown": not_fixed}
 	return { "q":question, "a":answer }
 }
 
@@ -184,11 +176,11 @@ export function fixed () {  // Called if the issue is diagnosed.
 			}
 		]
 	}
-	var answer = []
+	var answer = {}
 	return { "q":question, "a":answer }
 }
 
-export function not_fixed () {  //Called if the issue cannot be diagnosed/
+export function not_fixed () {  //Called if the issue cannot be diagnosed.
 	var question = {
 		"blocks": [
 			{
@@ -200,6 +192,6 @@ export function not_fixed () {  //Called if the issue cannot be diagnosed/
 			}
 		]
 	}
-	var answer = []
+	var answer = {}
 	return { "q":question, "a":answer }
 }
