@@ -32,7 +32,7 @@ var map = {};
 
 slackInteractions.action({ type:"static_select" }, (payload, respond) => {
   console.log("Payload: ", payload);
-  respond({ text: 'Thanks for your submission.' });
+  respond({ text: 'Thanks for pushing a button.' });
 
   // Update original message to remove buttons.
   //chat.update()

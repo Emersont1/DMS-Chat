@@ -25,21 +25,27 @@
 					"text": {
 						"type": "plain_text",
 						"text": "Routine A"
-					}
+					},
+					"value": "cancel",
+					"action_id": "button"
 				},
 				{
 					"type": "button",
 					"text": {
 						"type": "plain_text",
 						"text": "Routine B"
-					}
+					},
+					"value": "cancel",
+					"action_id": "button"
 				},
 				{
 					"type": "button",
 					"text": {
 						"type": "plain_text",
 						"text": "Routine C"
-					}
+					},
+					"value": "cancel",
+					"action_id": "button"
 				},
 				{
 					"type": "button",
@@ -47,7 +53,9 @@
 						"type": "plain_text",
 						"text": "Cancel"
 					},
-					"style": "danger"
+					"style": "danger",
+					"value": "cancel",
+					"action_id": "button"
 				}
 			]
 		}
