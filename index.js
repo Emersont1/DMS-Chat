@@ -25,8 +25,9 @@ slackEvents.on('message', (event) => {
     if(event.text == "w!help" || event.text == "w! help") {
       console.log(`${event.user} wants help.`);
       const res = await web.chat.postMessage({ channel: event.channel, text: 'Hello there' });
+    } else {
+      console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
     }
-    console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
   });
 
 // Initialize a server for the express app - you can skip this and the rest if you prefer to use app.listen()
