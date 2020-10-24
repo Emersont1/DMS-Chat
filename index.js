@@ -28,14 +28,6 @@ app.use(bodyParser());
 // Map of events and debugging steps left
 var map = {};
 
-slackInteractions.action({ type:"test_button" }, (payload, respond) => {
-  console.log("Payload: ", payload);
-  respond({ text: 'Thanks for pushing a button.' });
-
-  // Update original message to remove buttons.
-  //chat.update()
-});
-
 slackEvents.on('app_mention', (event) => {
   if(!('thread_ts' in event)) {
     const res = web.chat.postMessage({ channel: event.channel, text: '**Door Creaks Open**, You summoned me?' , thread_ts: event.ts});
