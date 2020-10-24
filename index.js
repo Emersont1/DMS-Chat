@@ -16,7 +16,6 @@ const app = express();
 
 // Plug the adapter in as a middleware
 app.use('/event', slackEvents.requestListener());
-app.use('/form', slackInteractions.expressMiddleware());
 
 // Example: If you're using a body parser, always put it after the event adapter in the middleware stack
 app.use(bodyParser());
@@ -26,9 +25,14 @@ var map = {};
 
 slackEvents.on('app_mention', (event) => {
   if(!('thread_ts' in event)) {
-    var a = event.text.replace("/<@[A-Z0-9]{11}>/i", "");
-    console.log(a);
+    var b = event.text.replace(/<@[A-Z0-9]+>/, "").trim();
+    console.log(b);
+	  if(b ==""){
+	  
+    const res = web.chat.postMessage({ channel: event.channel, text: 'List of availible machines:\ntoaster\n3d-printer' , thread_ts: event.ts});
+	  } else{
     const res = web.chat.postMessage({ channel: event.channel, text: '**Door Creaks Open**, You summoned me?' , thread_ts: event.ts});
+	  }
     // decipher machine id and poulate object
   }
 })
