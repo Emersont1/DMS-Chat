@@ -24,7 +24,7 @@
 					"type": "button",
 					"text": {
 						"type": "plain_text",
-						"text": "Click Me",
+						"text": "Click Me"
 					},
 					"value": "example_button",
 					"action_id": "button-01"
