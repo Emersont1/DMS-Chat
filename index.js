@@ -30,15 +30,22 @@ app.use(bodyParser());
 // Map of events and debugging steps left
 var map = {};
 
+slackInteractions.action({ type:"static_select" }, (payload, respond) => {
+  console.log("Payload: ", payload);
+  
+  // Update original messageto remove buttons.
+  //chat.update()
+});
+
 slackEvents.on('app_mention', (event) => {
-if(!('thread_ts' in event)) {
-  //const res = web.chat.postMessage({ channel: event.channel, text: '**Door Creaks Open**, You summoned me?' , thread_ts: event.ts});
-  var msg = initial_message;
-  msg["channel"] = event.channel;
-  msg["thread_ts"] = event.ts;
-  const res = web.chat.postMessage(msg);
-  // decipher machine id and poulate object
-}
+  if(!('thread_ts' in event)) {
+    //const res = web.chat.postMessage({ channel: event.channel, text: '**Door Creaks Open**, You summoned me?' , thread_ts: event.ts});
+    var msg = initial_message;
+    msg["channel"] = event.channel;
+    msg["thread_ts"] = event.ts;
+    const res = web.chat.postMessage(msg);
+    // decipher machine id and poulate object
+  }
 })
 
 slackEvents.on('message', (event) => {
