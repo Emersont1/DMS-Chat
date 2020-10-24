@@ -45,13 +45,13 @@ function routinePost(event, question, answer) {
   if (answer == {}) {
     // Don't try if empty JSON is returned for a. This indicates the routine has finished
   } else if (reaction == "thumbsup") {
-      answer_parsed = JSON.parse(answer);
-      new_response = JSON.parse(answer_parsed.thumbsup());
+      answer_parsed = answer;
+      new_response = answer_parsed.thumbsup();
       routinePost(event, new_response.q, new_response.a);
 
     } else if (reaction == "thumbsdown") {
-      answer_parsed = JSON.parse(answer);
-      new_response = JSON.parse(answer_parsed.thumbsdown());
+      answer_parsed = answer;
+      new_response = answer_parsed.thumbsdown();
       routinePost(event, new_response.q, new_response.a);
     }
 }
@@ -90,7 +90,7 @@ slackEvents.on('app_mention', (event) => {
         });
         // Import the selected routine
         routine = require(`./routines/${b}.js`);
-        new_response = JSON.parse(routine.func0());
+        new_response = routine.func0();
         routinePost(event, new_response.q, new_response.a);
       }
     }
