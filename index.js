@@ -21,13 +21,18 @@ app.use('/', slackEvents.requestListener());
 // Example: If you're using a body parser, always put it after the event adapter in the middleware stack
 app.use(bodyParser());
 
+// Map of events and debugging steps left
+var map = {};
+
+slackEvents.on('app_mention', (event) => {
+if(!(thread_ts in event)){
+  const res = web.chat.postMessage({ channel: event.channel, text: '**Door Creaks Open**, You summoned me?' , thread_ts: event.ts});
+
+  // decipher machine id and poulate object
+}
+})
+
 slackEvents.on('message', (event) => {
-    if(event.text == "w!help" || event.text == "w! help") {
-      console.log(`${event.user} wants help.`);
-      const res = web.chat.postMessage({ channel: event.channel, text: 'Hello there, General Kenobi' , thread_ts: event.ts});
-    } else {
-      console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
-    }
   });
 
 // Initialize a server for the express app - you can skip this and the rest if you prefer to use app.listen()
