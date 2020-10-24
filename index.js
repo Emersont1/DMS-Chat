@@ -22,7 +22,7 @@ const app = express();
 
 // Plug the adapter in as a middleware
 app.use('/event', slackEvents.requestListener());
-app.use('/form', slackInteractions.requestListener());
+app.use('/form', slackInteractions.expressMiddleware());
 
 // Example: If you're using a body parser, always put it after the event adapter in the middleware stack
 app.use(bodyParser());
@@ -30,7 +30,7 @@ app.use(bodyParser());
 // Map of events and debugging steps left
 var map = {};
 
-slackInteractions.action({ type:"static_select" }, (payload, respond) => {
+slackInteractions.action({ type:"button_action" }, (payload, respond) => {
   console.log("Payload: ", payload);
   respond({ text: 'Thanks for pushing a button.' });
 
@@ -50,7 +50,8 @@ slackEvents.on('app_mention', (event) => {
 })
 
 slackEvents.on('message', (event) => {
-  });
+
+});
 
 // Initialize a server for the express app - you can skip this and the rest if you prefer to use app.listen()
 const server = createServer(app);

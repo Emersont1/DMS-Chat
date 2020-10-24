@@ -27,7 +27,7 @@
 						"text": "Click Me"
 					},
 					"value": "example_button",
-					"action_id": "button-01"
+					"action_id": "button_action"
 				}
 			]
 		}
