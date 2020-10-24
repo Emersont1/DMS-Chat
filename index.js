@@ -30,7 +30,7 @@ app.use(bodyParser());
 // Map of events and debugging steps left
 var map = {};
 
-slackInteractions.action({ type:"button_action" }, (payload, respond) => {
+slackInteractions.action({ type:"test_button" }, (payload, respond) => {
   console.log("Payload: ", payload);
   respond({ text: 'Thanks for pushing a button.' });
 
