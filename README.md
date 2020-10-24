@@ -2,4 +2,7 @@
 
 A project for the DMS 2020 Hack
 
-https://discord.com/oauth2/authorize?client_id=769488486214139915&scope=bot
+This is a Slack App that aids operators diagnosing problems with machines, etc.
+It is built to be exstendable, with each diagnosis routine being a simple json file
+
+The project requires node.js to run, with npm also essentally required.
