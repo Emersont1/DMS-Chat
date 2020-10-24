@@ -22,7 +22,7 @@ const app = express();
 
 // Plug the adapter in as a middleware
 app.use('/event', slackEvents.requestListener());
-//app.use('/form', x);
+app.use('/form', slackInteractions.requestListener());
 
 // Example: If you're using a body parser, always put it after the event adapter in the middleware stack
 app.use(bodyParser());
