@@ -30,6 +30,8 @@ var map = {};
 
 slackEvents.on('app_mention', (event) => {
   if(!('thread_ts' in event)) {
+    var a = event.text.replace("/<@[A-Z0-9]{11}>/i", "");
+    console.log(a);
     const res = web.chat.postMessage({ channel: event.channel, text: '**Door Creaks Open**, You summoned me?' , thread_ts: event.ts});
     // decipher machine id and poulate object
   }
