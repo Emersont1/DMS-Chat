@@ -18,7 +18,6 @@
   "homepage": "https://github.com/Emersont1/DMS-Chat#readme",
   "dependencies": {
     "@slack/events-api": "^2.3.4",
-    "@slack/interactive-messages": "^1.7.0",
     "@slack/web-api": "^5.13.0"
   }
 }
