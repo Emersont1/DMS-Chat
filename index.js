@@ -41,16 +41,14 @@ function routinePost(event, question, answer) {
 
   // Need to do reaction stuff here. For now just assuming :thumbsup: is picked.
   reaction = "thumbsup";
-
+  console.log(answer);
   if (answer == {}) {
     // Don't try if empty JSON is returned for a. This indicates the routine has finished
   } else if (reaction == "thumbsup") {
-      console.log(answer);
       new_response = answer.thumbsup();
       routinePost(event, new_response.q, new_response.a);
 
     } else if (reaction == "thumbsdown") {
-      console.log(answer);
       new_response = answer.thumbsdown();
       routinePost(event, new_response.q, new_response.a);
     }
