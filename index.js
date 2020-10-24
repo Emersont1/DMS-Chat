@@ -1,4 +1,3 @@
-{  // Boilerplate
 const {
   createServer
 } = require('http');
@@ -30,7 +29,6 @@ app.use(bodyParser());  // Is this being used at all?
 
 // Map of events and debugging steps left
 var map = {};
-}
 
 
 
