@@ -25,7 +25,7 @@ app.use(bodyParser());
 var map = {};
 
 slackEvents.on('app_mention', (event) => {
-if(!(thread_ts in event)){
+if(!('thread_ts' in event)){
   const res = web.chat.postMessage({ channel: event.channel, text: '**Door Creaks Open**, You summoned me?' , thread_ts: event.ts});
 
   // decipher machine id and poulate object
