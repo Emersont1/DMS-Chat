@@ -10,6 +10,11 @@ const port = process.env.PORT || 3000;
 const slackEvents = createEventAdapter(slackSigningSecret);
 const slackInteractions = createMessageAdapter(slackSigningSecret);
 
+
+// JSON inclutions
+const initial_message = require("./message.json");
+
+
 const web = new WebClient(token);
 
 // Create an express application
@@ -25,9 +30,12 @@ app.use(bodyParser());
 var map = {};
 
 slackEvents.on('app_mention', (event) => {
-if(!('thread_ts' in event)){
-  const res = web.chat.postMessage({ channel: event.channel, text: '**Door Creaks Open**, You summoned me?' , thread_ts: event.ts});
-
+if(!('thread_ts' in event)) {
+  //const res = web.chat.postMessage({ channel: event.channel, text: '**Door Creaks Open**, You summoned me?' , thread_ts: event.ts});
+  var msg = initial_message;
+  msg["channel"] = event.channel;
+  msg["thread_ts"] = event.ts;
+  const res = web.chat.postMessage(msg);
   // decipher machine id and poulate object
 }
 })

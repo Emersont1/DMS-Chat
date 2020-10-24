@@ -1,0 +1,55 @@
+{
+	"blocks": [
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "*Welcome to _Wheatley_* :tada:"
+			}
+		},
+		{
+			"type": "divider"
+		},
+		{
+			"type": "section",
+			"text": {
+				"type": "mrkdwn",
+				"text": "This bot will run the dagnostic routine asked of it.\nThe available routines are:"
+			}
+		},
+		{
+			"type": "actions",
+			"elements": [
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Routine A"
+					}
+				},
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Routine B"
+					}
+				},
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Routine C"
+					}
+				},
+				{
+					"type": "button",
+					"text": {
+						"type": "plain_text",
+						"text": "Cancel"
+					},
+					"style": "danger"
+				}
+			]
+		}
+	]
+}
