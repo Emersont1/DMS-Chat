@@ -21,7 +21,8 @@ const web = new WebClient(token);
 const app = express();
 
 // Plug the adapter in as a middleware
-app.use('/', slackEvents.requestListener());
+app.use('/event', slackEvents.requestListener());
+//app.use('/form', x);
 
 // Example: If you're using a body parser, always put it after the event adapter in the middleware stack
 app.use(bodyParser());
