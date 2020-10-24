@@ -42,7 +42,7 @@ function routinePost(event, question, answer) {
   // Need to do reaction stuff here. For now just assuming :thumbsup: is picked.
   reaction = "thumbsup";
 
-  if (answer == {}) {
+  if (Object.keys(answer).length === 0 && answer.constructor === Object) {
     // Don't try if empty JSON is returned for a. This indicates the routine has finished
   } else if (reaction == "thumbsup") {
       console.log(answer);
