@@ -1,8 +1,18 @@
-const { createServer } = require('http');
+const {
+  createServer
+} = require('http');
 const express = require('express');
 const bodyParser = require('body-parser');
-const { createEventAdapter } = require('@slack/events-api');
-const { WebClient } = require('@slack/web-api');
+const {
+  createEventAdapter
+} = require('@slack/events-api');
+const {
+  WebClient
+} = require('@slack/web-api');
+const fs = require('fs');
+
+
+
 const slackSigningSecret = process.env.SLACK_SIGNING_SECRET;
 const token = process.env.SLACK_TOKEN;
 const port = process.env.PORT || 3000;
@@ -24,18 +34,35 @@ app.use(bodyParser());
 var map = {};
 
 slackEvents.on('app_mention', (event) => {
-  if(!('thread_ts' in event)) {
+  if (!('thread_ts' in event)) {
     var b = event.text.replace(/<@[A-Z0-9]+>/, "").trim();
     console.log(b);
-	  if(b ==""){
-	  
-    const res = web.chat.postMessage({ channel: event.channel, text: 'List of availible machines:\ntoaster\n3d-printer' , thread_ts: event.ts});
-	  } else{
-    const res = web.chat.postMessage({ channel: event.channel, text: '**Door Creaks Open**, You summoned me?' , thread_ts: event.ts});
-	  }
-    // decipher machine id and poulate object
+    if (b == "") {
+
+      const res = web.chat.postMessage({
+        channel: event.channel,
+        text: 'List of availible machines:\ntoaster\n3d-printer',
+        thread_ts: event.ts
+      });
+    } else {
+
+      if (!fs.existsSync(`scripts${b}/.js`)) {
+        const res = web.chat.postMessage({
+          channel: event.channel,
+          text: "I'm sorry Dave, I'm afraid I can't let you do that",
+          thread_ts: event.ts
+        });
+      } else {
+        //populate data
+        const res = web.chat.postMessage({
+          channel: event.channel,
+          text: '**Door Creaks Open**, You summoned me?',
+          thread_ts: event.ts
+        });
+      }
+    }
   }
-})
+});
 
 slackEvents.on('message', (event) => {
 
@@ -47,4 +74,3 @@ server.listen(port, () => {
   // Log a message when the server is ready
   console.log(`Listening for events on ${server.address().port}`);
 });
-
