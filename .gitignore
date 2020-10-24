@@ -117,3 +117,6 @@ dist
 
 # discord token
 config.json
+
+# startup script with Slack token
+start.sh
