@@ -41,7 +41,8 @@ slackEvents.on('app_mention', (event) => {
       var str = "List of availible machines:";
       //fs.readdirSync("routines");
       for(const val of fs.readdirSync("routines")){
-        str += `\n+ ${val}  `;
+        var a = val.replace(".js", "");
+        str += `\n+ ${a}  `;
       }
       const res = web.chat.postMessage({
         channel: event.channel,
