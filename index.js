@@ -3,10 +3,14 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const { createEventAdapter } = require('@slack/events-api');
 const { createMessageAdapter } = require('@slack/interactive-messages');
+const { WebClient } = require('@slack/web-api');
 const slackSigningSecret = process.env.SLACK_SIGNING_SECRET;
+const token = process.env.SLACK_TOKEN;
 const port = process.env.PORT || 3000;
 const slackEvents = createEventAdapter(slackSigningSecret);
 const slackInteractions = createMessageAdapter(slackSigningSecret);
+
+const web = new WebClient(token);
 
 // Create an express application
 const app = express();
@@ -19,7 +23,8 @@ app.use(bodyParser());
 
 slackEvents.on('message', (event) => {
     if(event.text == "w!help" || event.text == "w! help") {
-      console.log(`${event.user} wants help.`)
+      console.log(`${event.user} wants help.`);
+      const res = await web.chat.postMessage({ channel: event.channel, text: 'Hello there' });
     }
     console.log(`Received a message event: user ${event.user} in channel ${event.channel} says ${event.text}`);
   });
