@@ -1,4 +1,4 @@
-function func0 () {  //Starting question
+export function func0 () {  //Starting question
 	var question = {
 		"blocks": [
 			{
@@ -25,7 +25,7 @@ function func0 () {  //Starting question
 	return { "q":question, "a":answer }
 }
 
-function func1 () {
+export function func1 () {
 	var question = {
 		"blocks": [
 			{
@@ -49,7 +49,7 @@ function func1 () {
 	return { "q":question, "a":answer }
 }
 
-function func2 () {
+export function func2 () {
 	var question = {
 		"blocks": [
 			{
@@ -66,7 +66,7 @@ function func2 () {
 	return { "q":question, "a":answer }
 }
 
-function func3 () {
+export function func3 () {
 	var question = {
 		"blocks": [
 			{
@@ -90,7 +90,7 @@ function func3 () {
 	return { "q":question, "a":answer }
 }
 
-function func4 () {
+export function func4 () {
 	var question = {
 		"blocks": [
 			{
@@ -107,7 +107,7 @@ function func4 () {
 	return { "q":question, "a":answer }
 }
 
-function func5 () {
+export function func5 () {
 	var question = {
 		"blocks": [
 			{
@@ -131,7 +131,7 @@ function func5 () {
 	return { "q":question, "a":answer }
 }
 
-function func6 () {
+export function func6 () {
 	var question = {
 		"blocks": [
 			{
@@ -148,7 +148,7 @@ function func6 () {
 	return { "q":question, "a":answer }
 }
 
-function func7 () {
+export function func7 () {
 	var question = {
 		"blocks": [
 			{
@@ -172,7 +172,7 @@ function func7 () {
 	return { "q":question, "a":answer }
 }
 
-function fixed () {  // Called if the issue is diagnosed.
+export function fixed () {  // Called if the issue is diagnosed.
 	var question = {
 		"blocks": [
 			{
@@ -188,7 +188,7 @@ function fixed () {  // Called if the issue is diagnosed.
 	return { "q":question, "a":answer }
 }
 
-function not_fixed () {  //Called if the issue cannot be diagnosed/
+export function not_fixed () {  //Called if the issue cannot be diagnosed/
 	var question = {
 		"blocks": [
 			{
