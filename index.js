@@ -39,7 +39,7 @@ async function sendQuestion(ev, question) {
 
       const v = await web.chat.postMessage(msg);
       map[i].last_msg = v.ts;
-      for (const [key, value] of Object.entries(answer)) {
+      for (const [key, value] of Object.entries(map[i].a)) {
         await web.reactions.add({
           channel: v.channel,
           name: key,
