@@ -76,16 +76,16 @@ slackEvents.on('app_mention', (event) => {
       if (!fs.existsSync(`routines/${b}.js`)) {
         const res = web.chat.postMessage({
           channel: event.channel,
-          text: "I'm sorry Dave, I'm afraid I can't let you do that",
+          text: `I'm sorry Dave, I'm afraid I can't let you do that.\n ${b} is not a machine I recognise`,
           thread_ts: event.ts
         });
       } else {
         // Populate data
-        const res = web.chat.postMessage({
+/*        const res = web.chat.postMessage({
           channel: event.channel,
           text: '**Door Creaks Open**, You summoned me?',
           thread_ts: event.ts
-        });
+        });*/
         // Import the selected routine
         routine = require(`./routines/${b}.js`);
         new_response = routine.func0();
