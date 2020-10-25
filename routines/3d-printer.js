@@ -17,7 +17,7 @@ function turned_on() {
 					"type": "mrkdwn",
                     "text": "*Important Notice:* Ensure the USB cable is not plugged in before proceeding"
 				}
-			}
+			},
 			{
 				"type": "divider"
 			},
