@@ -1,0 +1,69 @@
+\documentclass[aspectratio=169]{beamer}
+
+\usepackage{theme}
+\StopCensoring
+\definecolor{syntaxComment}{rgb}{0.4, 0.4, 0.4}
+\usepackage{multicol}
+\newcommand{\pausefn}{\pause}
+%\newcommand{\pausefn}{}
+
+\title{Slack Bot for Diagnosing Issues with Machines}
+\subtitle{Team: Walks Into a Bar}
+\author{Peter \& James}
+\institute[]{DMS Hackathon 2020}
+\date{\today}
+
+\setlength{\parindent}{1em}
+
+\begin{document}
+% Title slide
+\maketitleslide
+
+\begin{frame}{}
+    \frametitle{The Issue}    
+    The challenge we decided to talk up with this hackathon was to create a chatbot that helped with diagnosing issues with machines, and other complex systems. These systems often have minor but essential tips and tricks that operators only learn through experience. This chatbot should allow them to impart their wisdom into it and through questioning the current operator it can tell them the steps they need to take to fix whatever the current issue is.
+\end{frame}
+
+\begin{frame}{}
+    \frametitle{How it works}
+    Our chatbot is a Slack App written in node.js, running on a Hetzner cloud VPS.
+    Slack is a web chat platform which is used by businesses to communicate, and because of this our chatbot will be easy to integrate into existing infrastructures. It also means that there is a very easy channel to escalate any issues that are not fixed to a maintenance department, etc.
+    \begin{figure}
+        \centering
+        \includegraphics[width=6cm]{Slack_RGB.png}
+        \label{figforgot comma:slack_logo}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{}
+    \frametitle{Extensibility}
+    \framesubtitle{Making our chatbot fit the needs of users}
+    We have created a module system to make it easy for even non-programmers to add addition diagnostic routines. Just add questions following the provided template and leave it in a folder to add an entirely new routine.
+    % \centering \includegraphics[width=6cm]{nodejs-new-pantone-black.pdf}[H]
+    \begin{figure}
+        \centering
+        \includegraphics[width=6cm]{node-js-736399.png}
+        \label{fig:node_logo}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{}
+    \frametitle{Cost and Deployment}
+    Our solution is very easy to deploy, and can be really easily hosted on a cheap cloud computer VPS (the one we are using is only €2.99 a month), allowing for usage across multiple sites and the  ease of not having to worry about the hardware or any firewall or other networking shenanigans.
+    \begin{figure}
+        \centering
+        \includegraphics[width=4cm]{hosted-by-hetzner-201.png}
+        \label{fig:hetzner_logo}
+    \end{figure}
+\end{frame}
+
+\section{Video Demo!\newline \newline Look for Demo.mp4 in the Files Section}
+
+\begin{frame}{}
+    \frametitle{Thanks for Listening}
+    \framesubtitle{Feel free to ask us any questions}
+    You can find of the code at \url{https://github.com/Emersont1/DMS-Chat} \newline \newline
+    We've heard that this is where we should plug our twitter,\newline so you can find us at \texttt{@pmypt3} and \texttt{@fraetor\_}
+\end{frame}
+
+\end{document}
