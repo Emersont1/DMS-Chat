@@ -38,8 +38,8 @@ async function sendQuestion(event, question, answer){
   // populate global state dictionary
 
   const v= await web.chat.postMessage(msg);
-for(const [key, value] of Object.entries(answer)){
-  await web.reactions.add({channel: v.channel, name:key, timestamp:v.ts});
+  for(const [key, value] of Object.entries(answer)){
+    await web.reactions.add({channel: v.channel, name:key, timestamp:v.ts});
 }
 
 }
