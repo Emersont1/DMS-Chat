@@ -112,7 +112,7 @@ slackEvents.on('reaction_added', (event) => {
         if(event.reaction == key)
         new_response = value();
         map[i].a = new_response.a; 
-        await sendQuestion(event.item, new_response.q);
+        sendQuestion(event.item, new_response.q);
         return;
       }}
 
