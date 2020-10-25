@@ -100,7 +100,12 @@ slackEvents.on('app_mention', (event) => {
         new_response = routine.func0();
 
         // populate map array here
-
+        var obj = {
+          chan: event.channel,
+          thread_ts: event.ts,
+          a: new_response.a,
+        };
+        map.push(obj);
         sendQuestion(event, new_response.q, new_response.a);
 
         // move into an event handler
@@ -110,8 +115,8 @@ slackEvents.on('app_mention', (event) => {
   }
 });
 
-slackEvents.on('message', (event) => {
-
+slackEvents.on('reaction_added', (event) => {
+  console.log(event);
 });
 
 // Initialize a server for the express app - you can skip this and the rest if you prefer to use app.listen()
