@@ -109,18 +109,16 @@ slackEvents.on('reaction_added', (event) => {
       // Don't try if empty JSON is returned for a. This indicates the routine has finished
     } else {
       for(const [key, value] of Object.entries(map[i].a)){
-        if(event.reaction == key)
+        if(event.reaction == key){
         new_response = value();
         map[i].a = new_response.a; 
         sendQuestion(event.item, new_response.q);
         return;
       }}
-
-    break;
    }
  }
 
-});
+}});
 
 // Initialize a server for the express app - you can skip this and the rest if you prefer to use app.listen()
 const server = createServer(app);
