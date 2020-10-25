@@ -15,10 +15,15 @@ The project requires node.js to run, with npm also essentially required.
 + Easy escalation to Maintenance
 
 ## Screenshots
+
 ### The bot can list available machines it has diagnosis routines for
+
 ![](images/list-machines.png)
 
 ### Simple Reaction system
+
 ![](images/reaction-demo.png)
+
 ### Easy Escalation to a Maintenance Dept.
+
 ![](images/escalate.png)
