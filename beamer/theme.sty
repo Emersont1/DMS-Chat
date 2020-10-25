@@ -1,0 +1,82 @@
+\usepackage{amsfonts, amsmath, amsthm}
+\usepackage[sfdefault]{cabin}
+\usepackage[T1]{fontenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{epigraph}
+\usepackage{censor}
+
+\graphicspath{ {./images/} }
+
+\usetheme{Madrid}
+\usecolortheme{dolphin}
+\beamertemplatenavigationsymbolsempty
+\definecolor{primary_col}{RGB}{170, 0, 0}
+
+% Sets Colours for Titles Bullet Points
+\setbeamercolor*{structure}{fg=primary_col}
+
+% Set math mode to look normal
+\usefonttheme[onlymath]{serif}
+
+% Sets Colours for Bottom Bar
+\setbeamercolor*{palette primary}{use=structure,fg=white,bg=primary_col}
+\setbeamercolor*{palette secondary}{use=structure,fg=white,bg=primary_col}
+\setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=primary_col}
+
+\setbeamertemplate{footline}
+{
+  \leavevmode%
+  \hbox{%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{author in head/foot}%
+    \usebeamerfont{author in head/foot}\insertshortauthor\expandafter\ifblank\expandafter{\beamer@shortinstitute}{}{~~(\insertshortinstitute)}
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,center]{title in head/foot}%
+    \usebeamerfont{title in head/foot}\insertshorttitle
+  \end{beamercolorbox}%
+  \begin{beamercolorbox}[wd=.333333\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{\fill}
+    \insertframenumber{} / \inserttotalframenumber\hspace*{1ex}
+  \end{beamercolorbox}}%
+  \vskip0pt%
+}
+
+\newcommand{\ubcf}[1]{\usebeamercolor[fg]{#1}\usebeamerfont{#1}}
+
+\setbeamertemplate{title page}{
+  %\center\includegraphics[height=3cm]{et1_logo.png}\par
+
+  {\center\ubcf{title}\inserttitle\par}
+  {\center\ubcf{subtitle}\insertsubtitle\par}
+
+  {\center\ubcf{author}\insertauthor\par}
+  {\center\ubcf{date}\insertinstitute\par} %I've swapped the styling of date and
+  {\center\ubcf{institute}\insertdate\par} %institute, because date looks too big
+}
+
+\setbeamertemplate{frametitle} {{
+  \@tempdima=\textwidth   \advance\@tempdima by\beamer@leftmargin%
+  \advance\@tempdima by\beamer@rightmargin%
+  \usebeamerfont{frametitle} \strut\insertframetitle\strut\par
+}
+
+{\ifx\insertframesubtitle\@empty\else
+\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\strut\insertframesubtitle\strut\par
+\fi}
+\vspace{0.5em}
+}
+
+\AtBeginSection[]{{
+\setbeamertemplate{logo}{}
+  \begin{frame}
+  %\center\includegraphics[height=2.5cm]{et1_logo.png}\vspace{1em}\par
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=true,rounded=true]{title}
+    \usebeamerfont{title}\insertsectionhead\par%
+  \end{beamercolorbox}
+  \end{frame}
+}}
+
+% This is a titleslide without the little (topright) hacksoc logo
+\newcommand{\maketitleslide}{{\setbeamertemplate{logo}{}\begin{frame}\titlepage\end{frame}}}
+\newcommand{\footsep}{${}^{\mathrm{,}}$}
