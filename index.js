@@ -25,25 +25,30 @@ const app = express();
 app.use('/event', slackEvents.requestListener());
 
 // Example: If you're using a body parser, always put it after the event adapter in the middleware stack
-app.use(bodyParser());  // Is this being used at all?
+app.use(bodyParser()); // Is this being used at all?
 
 // Map of events and debugging steps left
 var map = [];
 
-async function sendQuestion(ev, question){
-  for(var i = 0; i< map.length; i++){
-    if(map[i].thread_ts== ev.ts){
-  msg = question;
-  msg["channel"]=ev.channel;
-  msg["thread_ts"]=ev.ts;
+async function sendQuestion(ev, question) {
+  for (var i = 0; i < map.length; i++) {
+    if (map[i].thread_ts == ev.ts) {
+      msg = question;
+      msg["channel"] = ev.channel;
+      msg["thread_ts"] = ev.ts;
 
-  const v= await web.chat.postMessage(msg);
-  map[i].last_msg = v.ts;
-  for(const [key, value] of Object.entries(answer)){
-    await web.reactions.add({channel: v.channel, name:key, timestamp:v.ts});
-}
-}
+      const v = await web.chat.postMessage(msg);
+      map[i].last_msg = v.ts;
+      for (const [key, value] of Object.entries(answer)) {
+        await web.reactions.add({
+          channel: v.channel,
+          name: key,
+          timestamp: v.ts
+        });
+      }
+    }
 
+  }
 }
 
 
@@ -55,7 +60,7 @@ slackEvents.on('app_mention', (event) => {
     if (b == "") {
       var str = "List of available machines:";
       //fs.readdirSync("routines");
-      for(const val of fs.readdirSync("routines")){
+      for (const val of fs.readdirSync("routines")) {
         var a = val.replace(".js", "");
         str += `\n    ${a}`;
       }
@@ -99,26 +104,28 @@ slackEvents.on('app_mention', (event) => {
 });
 
 slackEvents.on('reaction_added', (event) => {
- for(var i = 0; i< map.length; i++){
-   if(map[i].channel== event.channel && event.item.ts == map[i].last_msg && event.user == map[i].user){
-    // handle
+  for (var i = 0; i < map.length; i++) {
+    if (map[i].channel == event.channel && event.item.ts == map[i].last_msg && event.user == map[i].user) {
+      // handle
 
-    console.log(event);
+      console.log(event);
 
-    if (Object.keys(map[i].a).length === 0 && map[i].a.constructor === Object) {
-      // Don't try if empty JSON is returned for a. This indicates the routine has finished
-    } else {
-      for(const [key, value] of Object.entries(map[i].a)){
-        if(event.reaction == key){
-        new_response = value();
-        map[i].a = new_response.a; 
-        sendQuestion(event.item, new_response.q);
-        return;
-      }}
-   }
- }
+      if (Object.keys(map[i].a).length === 0 && map[i].a.constructor === Object) {
+        // Don't try if empty JSON is returned for a. This indicates the routine has finished
+      } else {
+        for (const [key, value] of Object.entries(map[i].a)) {
+          if (event.reaction == key) {
+            new_response = value();
+            map[i].a = new_response.a;
+            sendQuestion(event.item, new_response.q);
+            return;
+          }
+        }
+      }
+    }
 
-}});
+  }
+});
 
 // Initialize a server for the express app - you can skip this and the rest if you prefer to use app.listen()
 const server = createServer(app);
