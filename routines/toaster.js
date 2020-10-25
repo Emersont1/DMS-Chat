@@ -15,12 +15,12 @@ function plugged_in () {  //Starting question
 				"type": "section",
 				"text": {
 					"type": "mrkdwn",
-					"text": "React with :thumbsup: if your toaster is plugged in.\nReact with :thumbsdown: if it is not."
+					"text": "React with :+1: if your toaster is plugged in.\nReact with :-1: if it is not."
 				}
 			}
 		]
 	}
-	var answer = {"thumbsup": check_bread, "thumbsdown": plug_in}
+	var answer = {"+1": check_bread, "-1": plug_in}
 	return { "q":question, "a":answer }
 }
 
@@ -38,12 +38,12 @@ function plug_in () {
 				"type": "section",
 				"text": {
 					"type": "mrkdwn",
-					"text": "React with :thumbsup: if that fixed the issue.\nReact with :thumbsdown: if it did not."
+					"text": "React with :+1: if that fixed the issue.\nReact with :-1: if it did not."
 				}
 			}
 		]
 	}
-	var answer = {"thumbsup": fixed, "thumbsdown": check_bread}
+	var answer = {"+1": fixed, "-1": check_bread}
 	return { "q":question, "a":answer }
 }
 
@@ -54,12 +54,12 @@ function check_bread () {
 				"type": "section",
 				"text": {
 					"type": "mrkdwn",
-					"text": "React with :thumbsup: if there is any bread in the toaster.\nReact with :thumbsdown: if there is not."
+					"text": "React with :+1: if there is any bread in the toaster.\nReact with :-1: if there is not."
 				}
 			}
 		]
 	}
-	var answer = {"thumbsup": heat_settings, "thumbsdown": insert_bread}
+	var answer = {"+1": heat_settings, "-1": insert_bread}
 	return { "q":question, "a":answer }
 }
 
@@ -77,12 +77,12 @@ function insert_bread () {
 				"type": "section",
 				"text": {
 					"type": "mrkdwn",
-					"text": "React with :thumbsup: if that fixed the issue.\nReact with :thumbsdown: if it did not."
+					"text": "React with :+1: if that fixed the issue.\nReact with :-1: if it did not."
 				}
 			}
 		]
 	}
-	var answer = {"thumbsup": fixed, "thumbsdown": heat_settings}
+	var answer = {"+1": fixed, "-1": heat_settings}
 	return { "q":question, "a":answer }
 }
 
@@ -93,12 +93,12 @@ function heat_settings () {
 				"type": "section",
 				"text": {
 					"type": "mrkdwn",
-					"text": "React with :thumbsup: if the heat is set between 3 and 5.\nReact with :thumbsdown: if it is not."
+					"text": "React with :+1: if the heat is set between 3 and 5.\nReact with :-1: if it is not."
 				}
 			}
 		]
 	}
-	var answer = {"thumbsup": is_pushed_down, "thumbsdown": set_heat}
+	var answer = {"+1": is_pushed_down, "-1": set_heat}
 	return { "q":question, "a":answer }
 }
 
@@ -116,12 +116,12 @@ function set_heat () {
 				"type": "section",
 				"text": {
 					"type": "mrkdwn",
-					"text": "React with :thumbsup: if that fixed the issue.\nReact with :thumbsdown: if it did not."
+					"text": "React with :+1: if that fixed the issue.\nReact with :-1: if it did not."
 				}
 			}
 		]
 	}
-	var answer = {"thumbsup": fixed, "thumbsdown": is_pushed_down}
+	var answer = {"+1": fixed, "-1": is_pushed_down}
 	return { "q":question, "a":answer }
 }
 
@@ -132,12 +132,12 @@ function is_pushed_down () {
 				"type": "section",
 				"text": {
 					"type": "mrkdwn",
-					"text": "React with :thumbsup: if the toaster is pushed down.\nReact with :thumbsdown: if it is not."
+					"text": "React with :+1: if the toaster is pushed down.\nReact with :-1: if it is not."
 				}
 			}
 		]
 	}
-	var answer = {"thumbsup": not_fixed, "thumbsdown": push_down}
+	var answer = {"+1": not_fixed, "-1": push_down}
 	return { "q":question, "a":answer }
 }
 
@@ -155,12 +155,12 @@ function push_down () {
 				"type": "section",
 				"text": {
 					"type": "mrkdwn",
-					"text": "React with :thumbsup: if that fixed the issue.\nReact with :thumbsdown: if it did not."
+					"text": "React with :+1: if that fixed the issue.\nReact with :-1: if it did not."
 				}
 			}
 		]
 	}
-	var answer = {"thumbsup": fixed, "thumbsdown": not_fixed}
+	var answer = {"+1": fixed, "-1": not_fixed}
 	return { "q":question, "a":answer }
 }
 
