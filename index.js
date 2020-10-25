@@ -59,7 +59,7 @@ slackEvents.on('app_mention', (event) => {
     var b = event.text.replace(/<@[A-Z0-9]+>/, "").trim();
     console.log(b);
     if (b == "") {
-      var str = "List of available machines:";
+      var str = "List of available machines:\nRun one with @Wheatley machine";
       //fs.readdirSync("routines");
       for (const val of fs.readdirSync("routines")) {
         var a = val.replace(".js", "");
