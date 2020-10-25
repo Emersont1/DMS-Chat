@@ -33,6 +33,7 @@ var map = [];
 async function sendQuestion(ev, question) {
   for (var i = 0; i < map.length; i++) {
     if (map[i].thread_ts == ev.ts) {
+      console.log("here");
       msg = question;
       msg["channel"] = ev.channel;
       msg["thread_ts"] = ev.ts;
