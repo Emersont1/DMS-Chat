@@ -1,4 +1,4 @@
-function func0 () {  //Starting question
+function plugged_in () {  //Starting question
 	var question = {
 		"blocks": [
 			{
@@ -20,11 +20,11 @@ function func0 () {  //Starting question
 			}
 		]
 	}
-	var answer = {"thumbsup": func2, "thumbsdown": func1}
+	var answer = {"thumbsup": check_bread, "thumbsdown": plug_in}
 	return { "q":question, "a":answer }
 }
 
-function func1 () {
+function plug_in () {
 	var question = {
 		"blocks": [
 			{
@@ -43,11 +43,11 @@ function func1 () {
 			}
 		]
 	}
-	var answer = {"thumbsup": fixed, "thumbsdown": func2}
+	var answer = {"thumbsup": fixed, "thumbsdown": check_bread}
 	return { "q":question, "a":answer }
 }
 
-function func2 () {
+function check_bread () {
 	var question = {
 		"blocks": [
 			{
@@ -59,11 +59,11 @@ function func2 () {
 			}
 		]
 	}
-	var answer = {"thumbsup": func4, "thumbsdown": func3}
+	var answer = {"thumbsup": heat_settings, "thumbsdown": insert_bread}
 	return { "q":question, "a":answer }
 }
 
-function func3 () {
+function insert_bread () {
 	var question = {
 		"blocks": [
 			{
@@ -82,11 +82,11 @@ function func3 () {
 			}
 		]
 	}
-	var answer = {"thumbsup": fixed, "thumbsdown": func4}
+	var answer = {"thumbsup": fixed, "thumbsdown": heat_settings}
 	return { "q":question, "a":answer }
 }
 
-function func4 () {
+function heat_settings () {
 	var question = {
 		"blocks": [
 			{
@@ -98,11 +98,11 @@ function func4 () {
 			}
 		]
 	}
-	var answer = {"thumbsup": func6, "thumbsdown": func5}
+	var answer = {"thumbsup": is_pushed_down, "thumbsdown": set_heat}
 	return { "q":question, "a":answer }
 }
 
-function func5 () {
+function set_heat () {
 	var question = {
 		"blocks": [
 			{
@@ -121,11 +121,11 @@ function func5 () {
 			}
 		]
 	}
-	var answer = {"thumbsup": fixed, "thumbsdown": func6}
+	var answer = {"thumbsup": fixed, "thumbsdown": is_pushed_down}
 	return { "q":question, "a":answer }
 }
 
-function func6 () {
+function is_pushed_down () {
 	var question = {
 		"blocks": [
 			{
@@ -137,11 +137,11 @@ function func6 () {
 			}
 		]
 	}
-	var answer = {"thumbsup": not_fixed, "thumbsdown": func7}
+	var answer = {"thumbsup": not_fixed, "thumbsdown": push_down}
 	return { "q":question, "a":answer }
 }
 
-function func7 () {
+function push_down () {
 	var question = {
 		"blocks": [
 			{
@@ -197,5 +197,5 @@ function not_fixed () {  //Called if the issue cannot be diagnosed.
 }
 
 module.exports = {
-    "func0":func0
+    "func0":plugged_in
 }
