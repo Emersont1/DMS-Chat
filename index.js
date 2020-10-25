@@ -41,8 +41,8 @@ async function routinePost(event, question, answer) {
 
   const v= await web.chat.postMessage(msg);
 
-  var a = await web.reactions.add({channel: v.channel, reaction:"thumbsup", timestamp:v.ts});
-  var b = await web.reactions.add({channel: v.channel, reaction:"thumbsdown", timestamp:v.ts});
+  var a = await web.reactions.add({channel: v.channel, name:"thumbsup", timestamp:v.ts});
+  var b = await web.reactions.add({channel: v.channel, name:"thumbsdown", timestamp:v.ts});
   console.log(a);
   console.log(b);
   
