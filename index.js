@@ -117,7 +117,7 @@ slackEvents.on('app_mention', (event) => {
 });
 
 slackEvents.on('reaction_added', (event) => {
- for(var i = 0; i< map.size(); i++){
+ for(var i = 0; i< map.length; i++){
    if(map[i].user == event.user && map[i].channel== event.channel){
     // handle
 
