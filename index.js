@@ -109,11 +109,14 @@ slackEvents.on('reaction_added', (event) => {
       // handle
 
       console.log(event);
-
+      console.log(map[i].a);
       if (Object.keys(map[i].a).length === 0 && map[i].a.constructor === Object) {
         // Don't try if empty JSON is returned for a. This indicates the routine has finished
+        console.log("empty object");
       } else {
         for (const [key, value] of Object.entries(map[i].a)) {
+          console.log(key);
+          console.log(event.reaction);
           if (event.reaction == key) {
             new_response = value();
             map[i].a = new_response.a;
