@@ -104,6 +104,7 @@ slackEvents.on('app_mention', (event) => {
           chan: event.channel,
           thread_ts: event.ts,
           a: new_response.a,
+          user: event.user,
         };
         map.push(obj);
         sendQuestion(event, new_response.q, new_response.a);
@@ -116,7 +117,16 @@ slackEvents.on('app_mention', (event) => {
 });
 
 slackEvents.on('reaction_added', (event) => {
-  console.log(event);
+ for(var i = 0; i< map.size(); i++){
+   if(map[i].user == event.user && map[i].channel== event.channel){
+    // handle
+
+    console.log(event);
+
+    break;
+   }
+ }
+
 });
 
 // Initialize a server for the express app - you can skip this and the rest if you prefer to use app.listen()
