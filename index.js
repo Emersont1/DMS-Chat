@@ -122,7 +122,7 @@ slackEvents.on('reaction_added', (event) => {
             new_response = value();
             map[i].a = new_response.a;
             console.log(map[i].a);
-            sendQuestion(event.item, new_response.q);
+            sendQuestion({channel: event.item.channel, ts:map[i].thread_ts}, new_response.q);
             return;
           }
         }
