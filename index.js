@@ -30,37 +30,20 @@ app.use(bodyParser());  // Is this being used at all?
 // Map of events and debugging steps left
 var map = [];
 
-async function sendQuestion(event, question, answer){
+async function sendQuestion(ev, question){
+  for(var i = 0; i< map.length; i++){
+    if(map[i].thread_ts== ev.ts){
   msg = question;
-  msg["channel"]=event.channel;
-  msg["thread_ts"]=event.ts;
-
-  // populate global state dictionary
+  msg["channel"]=ev.channel;
+  msg["thread_ts"]=ev.ts;
 
   const v= await web.chat.postMessage(msg);
+  map[i].last_msg = v.ts;
   for(const [key, value] of Object.entries(answer)){
     await web.reactions.add({channel: v.channel, name:key, timestamp:v.ts});
 }
-
 }
 
-async function routinePost(event, question, answer) {
-
-  // Need to do reaction stuff here. For now just assuming :thumbsup: is picked.
-
-  // need to do this in a different callback
-  reaction = "thumbsup";
-  console.log(answer);
-  if (Object.keys(answer).length === 0 && answer.constructor === Object) {
-    // Don't try if empty JSON is returned for a. This indicates the routine has finished
-  } else {
-    for(const [key, value] of Object.entries(answer)){
-      if(reaction == key)
-      new_response = value();
-      await sendQuestion(event, new_response.q, new_response.a);
-      await routinePost(event, new_response.q, new_response.a);
-      return;
-    }}
 }
 
 
@@ -79,7 +62,9 @@ slackEvents.on('app_mention', (event) => {
       const res = web.chat.postMessage({
         channel: event.channel,
         text: str,
-        thread_ts: event.ts
+        user: event.user,
+        thread_ts: event.ts,
+        last_msg: "",
       });
     } else {
       if (!fs.existsSync(`routines/${b}.js`)) {
@@ -107,10 +92,7 @@ slackEvents.on('app_mention', (event) => {
           user: event.user,
         };
         map.push(obj);
-        sendQuestion(event, new_response.q, new_response.a);
-
-        // move into an event handler
-        routinePost(event, new_response.q, new_response.a);
+        sendQuestion(event, new_response.q);
       }
     }
   }
@@ -118,10 +100,21 @@ slackEvents.on('app_mention', (event) => {
 
 slackEvents.on('reaction_added', (event) => {
  for(var i = 0; i< map.length; i++){
-   if(map[i].user == event.user && map[i].channel== event.channel){
+   if(map[i].channel== event.channel && event.item.ts == map[i].last_msg && event.user == map[i].user){
     // handle
 
     console.log(event);
+
+    if (Object.keys(map[i].a).length === 0 && map[i].a.constructor === Object) {
+      // Don't try if empty JSON is returned for a. This indicates the routine has finished
+    } else {
+      for(const [key, value] of Object.entries(map[i].a)){
+        if(event.reaction == key)
+        new_response = value();
+        map[i].a = new_response.a; 
+        await sendQuestion(event.item, new_response.q);
+        return;
+      }}
 
     break;
    }
