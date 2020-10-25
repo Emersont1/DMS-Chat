@@ -40,11 +40,10 @@ async function routinePost(event, question, answer) {
   // populate global state dictionary
 
   const v= await web.chat.postMessage(msg);
+for(const [key, value] of Object.entries(answer)){
+  await web.reactions.add({channel: v.channel, name:key, timestamp:v.ts});
+}
 
-  var a = await web.reactions.add({channel: v.channel, name:"thumbsup", timestamp:v.ts});
-  var b = await web.reactions.add({channel: v.channel, name:"thumbsdown", timestamp:v.ts});
-  console.log(a);
-  console.log(b);
   
 
   // Need to do reaction stuff here. For now just assuming :thumbsup: is picked.
@@ -54,14 +53,13 @@ async function routinePost(event, question, answer) {
   console.log(answer);
   if (Object.keys(answer).length === 0 && answer.constructor === Object) {
     // Don't try if empty JSON is returned for a. This indicates the routine has finished
-  } else if (reaction == "thumbsup") {
-      new_response = answer.thumbsup();
+  } else {
+    for(const [key, value] of Object.entries(answer)){
+      if(reaction == key)
+      new_response = value();
       await routinePost(event, new_response.q, new_response.a);
-
-    } else if (reaction == "thumbsdown") {
-      new_response = answer.thumbsdown();
-      await routinePost(event, new_response.q, new_response.a);
-    }
+      return;
+    }}
 }
 
 
