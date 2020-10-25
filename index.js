@@ -32,14 +32,22 @@ var map = {};
 
 
 
-function routinePost(event, question, answer) {
+async function routinePost(event, question, answer) {
   msg = question;
   msg["channel"]=event.channel;
   msg["thread_ts"]=event.ts;
-  const res=web.chat.postMessage(msg);
-  console.log(msg);
+
+  // populate global state dictionary
+  
+  const v= await web.chat.postMessage(msg);
+
+  web.reactions.add({channel: v.channel, reaction:"thumbsup", timestamp:v.ts});
+  web.reactions.add({channel: v.channel, reaction:"thumbsdown", timestamp:v.ts});
+  
 
   // Need to do reaction stuff here. For now just assuming :thumbsup: is picked.
+
+  // need to do this in a different callback
   reaction = "thumbsup";
   console.log(answer);
   if (Object.keys(answer).length === 0 && answer.constructor === Object) {
