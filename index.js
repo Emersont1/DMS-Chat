@@ -101,7 +101,7 @@ slackEvents.on('app_mention', (event) => {
 
         // populate map array here
 
-        sendQuestion(event, new_response.q, new_response.a);
+        await sendQuestion(event, new_response.q, new_response.a);
 
         // move into an event handler
         routinePost(event, new_response.q, new_response.a);
