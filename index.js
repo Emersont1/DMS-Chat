@@ -28,11 +28,9 @@ app.use('/event', slackEvents.requestListener());
 app.use(bodyParser());  // Is this being used at all?
 
 // Map of events and debugging steps left
-var map = {};
+var map = [];
 
-
-
-async function routinePost(event, question, answer) {
+async function sendQuestion(event, question, answer){
   msg = question;
   msg["channel"]=event.channel;
   msg["thread_ts"]=event.ts;
@@ -44,7 +42,9 @@ for(const [key, value] of Object.entries(answer)){
   await web.reactions.add({channel: v.channel, name:key, timestamp:v.ts});
 }
 
-  
+}
+
+async function routinePost(event, question, answer) {
 
   // Need to do reaction stuff here. For now just assuming :thumbsup: is picked.
 
@@ -57,6 +57,7 @@ for(const [key, value] of Object.entries(answer)){
     for(const [key, value] of Object.entries(answer)){
       if(reaction == key)
       new_response = value();
+      await sendQuestion(event, new_response.q, new_response.a);
       await routinePost(event, new_response.q, new_response.a);
       return;
     }}
@@ -97,6 +98,12 @@ slackEvents.on('app_mention', (event) => {
         // Import the selected routine
         routine = require(`./routines/${b}.js`);
         new_response = routine.func0();
+
+        // populate map array here
+
+        sendQuestion(event, new_response.q, new_response.a);
+
+        // move into an event handler
         routinePost(event, new_response.q, new_response.a);
       }
     }
